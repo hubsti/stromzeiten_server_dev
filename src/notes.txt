@@ -1,0 +1,11 @@
+query Timeseries  {
+  timeseries {
+    value
+    timestamp
+    metainfo{
+      type
+      country
+      unit
+    }
+  }
+}

@@ -1,0 +1,44 @@
+type Query {
+  info: String!
+  timeseries(datestart: String, dateend: String): [Datapoint!]!
+  timeseriesc(country: String, dateend: String): [Datapoint!]!
+  me: User!
+}
+
+type Subscription {
+  newDatapoint: Datapoint
+}
+
+type Mutation {
+  post(value: Float!, timestamp: String!): Datapoint!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+}
+
+type Datapoint {
+  id: ID!
+  value: Float!
+  timestamp: String!
+  postedBy: User
+  metainfo: Metadata
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  datapoints: [Datapoint!]!
+}
+
+type Metadata {
+  id: ID!
+  type: String!
+  unit: String!
+  country: String!
+  datapoints: [Datapoint!]!
+}
