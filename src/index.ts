@@ -16,7 +16,7 @@ async function main() {
 
   server.route({
     method: ["POST", "GET"],
-    url: "/graphql",
+    url: "/graphql/",
     handler: async (req, reply) => {
       const request: Request = {
         headers: req.headers,
@@ -29,7 +29,7 @@ async function main() {
         reply.header("Content-Type", "text/html");
         reply.send(
           renderGraphiQL({
-            endpoint: "/graphql",
+            endpoint: "/graphql/",
           })
         );
 
