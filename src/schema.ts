@@ -6,6 +6,7 @@ import { APP_SECRET } from "./auth";
 import { hash, compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { PubSubChannels } from "./pubsub";
+import { argsToArgsConfig } from "graphql/type/definition";
 
 const resolvers = {
   User: {
@@ -27,20 +28,21 @@ const resolvers = {
     info: () => `This is the API of a Hackernews Clone`,
     timeseries: async (
       parent: unknown,
-      args: { datestart?: string; dateend?: string },
+      args: { start?: string; end?: string; country?: string; type?: string },
       context: GraphQLContext
     ) => {
       const where =
-        args.datestart && args.dateend
+        args.start && args.end
           ? {
               AND: [
                 {
                   timestamp: {
-                    gte: new Date(args.datestart),
-                    lte: new Date(args.dateend),
+                    gte: new Date(args.start),
+                    lte: new Date(args.end),
                   },
                 },
-                { country: "Belgium" },
+                { country: args.country },
+                {metainfo: {type: args.type}}
               ],
             }
           : {};

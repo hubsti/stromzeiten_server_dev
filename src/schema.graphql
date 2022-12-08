@@ -1,6 +1,6 @@
 type Query {
   info: String!
-  timeseries(datestart: String, dateend: String): [Datapoint!]!
+  timeseries(start: String, end: String, country: String, type: String): [Datapoint!]!
   timeseriesc(country: String, dateend: String): [Datapoint!]!
   me: User!
 }
