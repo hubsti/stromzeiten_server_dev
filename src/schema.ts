@@ -40,7 +40,7 @@ const resolvers = {
                     lte: new Date(args.dateend),
                   },
                 },
-                { metainfo: { country: "Belgium" } },
+                { country: "Belgium" },
               ],
             }
           : {};
@@ -56,7 +56,7 @@ const resolvers = {
         args.country
           ? {
               AND: [
-                { metainfo: { country: args.country } },
+                { country: args.country },
               ],
             }
           : {};
@@ -139,7 +139,7 @@ const resolvers = {
     },
     post: async (
       parent: unknown,
-      args: { value: number; timestamp: string },
+      args: { value: number; timestamp: string, country: string},
       context: GraphQLContext
     ) => {
       if (context.currentUser === null) {
@@ -150,6 +150,7 @@ const resolvers = {
           value: args.value,
           timestamp: args.timestamp,
           postedBy: { connect: { id: context.currentUser.id } },
+          country: args.country
         },
       });
       context.pubSub.publish("newDatapoint", {

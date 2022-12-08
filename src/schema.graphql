@@ -21,6 +21,7 @@ type Datapoint {
   timestamp: String!
   postedBy: User
   metainfo: Metadata
+  country: String!
 }
 
 type AuthPayload {
@@ -39,6 +40,5 @@ type Metadata {
   id: ID!
   type: String!
   unit: String!
-  country: String!
   datapoints: [Datapoint!]!
 }
