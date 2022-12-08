@@ -25,7 +25,11 @@ const resolvers = {
 
       return context.currentUser;
     },
-    info: () => `This is the API of a Hackernews Clone`,
+    info: () => `API for the Stromzeiten App. Datasource: ENTSOE Transparency Platform`,
+    types:async (parent:unknown,
+      args: {}, context: GraphQLContext) => {
+      return context.prisma.metadata.findMany();
+    },
     timeseries: async (
       parent: unknown,
       args: { start?: string; end?: string; country?: string; type?: string },
